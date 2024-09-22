@@ -1,59 +1,121 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { SiNextdotjs } from 'react-icons/si';
+import { FC, FormEvent, useState } from 'react';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
-const Navbar = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
-  const toggleMenu = (): void => {
-    setIsOpen(!isOpen);
+const ContactPage: FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const validateForm = (): Partial<FormData> => {
+    const newErrors: Partial<FormData> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    const validationErrors = validateForm();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      setErrors({});
+      // Form is valid – do nothing or show a success message
+      console.log('Form is valid:', formData);
+    }
   };
 
   return (
-    <nav className="bg-gradient-to-r from-purple-500 to-cyan-500 p-4 fixed w-full z-10 shadow-lg">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="text-white text-2xl font-bold flex items-center">
-          <SiNextdotjs className="mr-2 text-white" size={30} />
-          <Link href="/" className="text-yellow-300 hover:text-yellow-400 transition">My Portfolio</Link>
-        </div>
-        <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            type="button"
-            className="text-white focus:outline-none"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-              />
-            </svg>
+    <div className="relative flex flex-col items-center justify-center h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/OIP.jpeg)'}}>
+      <h1 className="text-4xl font-bold text-center mb-6 text-blue-600">Contact Me</h1>
+      <div className="flex flex-col items-center">
+        <form className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg border border-gray-200 space-y-6 min-h-[400px]" onSubmit={handleSubmit}>
+          <div>
+            <input
+              type="text"
+              name="name"
+              className={`w-full border p-3 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+            {errors.name && <p className="text-red-500 mt-1">{errors.name}</p>}
+          </div>
+
+          <div>
+            <input
+              type="email"
+              name="email"
+              className={`w-full border p-3 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            {errors.email && <p className="text-red-500 mt-1">{errors.email}</p>}
+          </div>
+
+          <div>
+            <textarea
+              name="message"
+              className={`w-full border p-3 rounded text-black transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
+              placeholder="Message"
+              value={formData.message}
+              onChange={handleChange}
+              rows={4}
+            />
+            {errors.message && <p className="text-red-500 mt-1">{errors.message}</p>}
+          </div>
+
+          <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300">
+            Send Message
           </button>
-        </div>
-        <div className="hidden md:flex items-center space-x-10">
-          <Link href="/about" className="text-white hover:text-gray-200 transition">About</Link>
-          <Link href="/contact" className="text-white hover:text-gray-200 transition">Contact</Link>
+        </form>
+
+        <div className="flex justify-center mt-6 space-x-4">
+          <a href="https://github.com/zainabbehzad" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition">
+            <FaGithub className="w-6 h-6" />
+          </a>
+          <a href="https://www.linkedin.com/in/zainab-behzad-3126692b5" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition">
+            <FaLinkedin className="w-6 h-6" />
+          </a>
+          <a href="https://www.instagram.com/z_behzad_?igsh=a2ZuejVsZGp2a2pt" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition">
+            <FaInstagram className="w-6 h-6" />
+          </a>
         </div>
       </div>
-
-      {isOpen && (
-        <div className="md:hidden mt-4 flex flex-col space-y-4 bg-white shadow-lg rounded-lg p-4 absolute w-full left-0">
-          <Link href="/about" className="text-gray-800 hover:bg-gray-200 rounded p-2 transition">About</Link>
-          <Link href="/contact" className="text-gray-800 hover:bg-gray-200 rounded p-2 transition">Contact</Link>
-        </div>
-      )}
-    </nav>
+    </div>
   );
 };
 
-export default Navbar;
+export default ContactPage;
