@@ -1,59 +1,29 @@
-'use client';
+import { FC } from 'react';
+import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { SiNextdotjs } from 'react-icons/si';
-
-const Navbar = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = (): void => {
-    setIsOpen(!isOpen);
-  };
-
+const HomePage: FC = () => {
   return (
-    <nav className="bg-gradient-to-r from-purple-500 to-cyan-500 p-4 fixed w-full z-10 shadow-lg">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="text-white text-2xl font-bold flex items-center">
-          <SiNextdotjs className="mr-2 text-white" size={30} />
-          <Link href="/" className="text-yellow-300 hover:text-yellow-400 transition">My Portfolio</Link>
-        </div>
-        <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            type="button"
-            className="text-white focus:outline-none"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-              />
-            </svg>
-          </button>
-        </div>
-        <div className="hidden md:flex items-center space-x-10">
-          <Link href="/about" className="text-white hover:text-gray-200 transition">About</Link>
-          <Link href="/contact" className="text-white hover:text-gray-200 transition">Contact</Link>
-        </div>
-      </div>
+    <div className="relative flex flex-col items-center justify-center min-h-screen p-4 bg-cover bg-center" style={{ backgroundImage: 'url(/images/OIP.jpeg)' }}>
+      <h1 className="text-4xl font-bold mb-4 text-white">Welcome to My  
+        <span className='text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500'> Portfolio:</span> 
+        Where Ideas Meet  
+        <span className='text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500'> Technology!</span>
+      </h1>
+      <p className="text-lg mb-8 text-white">Navigate the Frontiers of Technology and Creative Solutions.</p>
 
-      {isOpen && (
-        <div className="md:hidden mt-4 flex flex-col space-y-4 bg-white shadow-lg rounded-lg p-4 absolute w-full left-0">
-          <Link href="/about" className="text-gray-800 hover:bg-gray-200 rounded p-2 transition">About</Link>
-          <Link href="/contact" className="text-gray-800 hover:bg-gray-200 rounded p-2 transition">Contact</Link>
-        </div>
-      )}
-    </nav>
+      <div className="flex space-x-4 mt-6">
+        <a href="https://www.linkedin.com/in/zainab-behzad-3126692b5" className="text-purple-500 hover:text-blue-400">
+          <FaLinkedin size={30} />
+        </a>
+        <a href="https://github.com/zainabbehzad" className="text-purple-500 hover:text-gray-400">
+          <FaGithub size={30} />
+        </a>
+        <a href="https://www.instagram.com/z_behzad_?igsh=a2ZuejVsZGp2a2pt" className="text-purple-500 hover:text-pink-400">
+          <FaInstagram size={30} />
+        </a>
+      </div>
+    </div>
   );
 };
 
-export default Navbar;
+export default HomePage;

@@ -57,7 +57,7 @@ const ContactPage: FC = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/OIP.jpeg)'}}>
+    <div className="relative flex flex-col items-center justify-center h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/images/OIP.jpeg)'}}>
       <h1 className="text-4xl font-bold text-center mb-6 text-blue-600">Contact Me</h1>
       <div className="flex flex-col items-center">
         <form className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg border border-gray-200 space-y-6 min-h-[400px]" onSubmit={handleSubmit}>
