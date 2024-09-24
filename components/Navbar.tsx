@@ -41,6 +41,7 @@ const Navbar = (): JSX.Element => {
           </button>
         </div>
         <div className="hidden md:flex items-center space-x-10">
+          <Link href="/" className="text-white hover:text-gray-200 transition">Home</Link>
           <Link href="/about" className="text-white hover:text-gray-200 transition">About</Link>
           <Link href="/contact" className="text-white hover:text-gray-200 transition">Contact</Link>
         </div>
@@ -48,6 +49,7 @@ const Navbar = (): JSX.Element => {
 
       {isOpen && (
         <div className="md:hidden mt-4 flex flex-col space-y-4 bg-white shadow-lg rounded-lg p-4 absolute w-full left-0">
+          <Link href="/" className="text-gray-800 hover:bg-gray-200 rounded p-2 transition">Home</Link>
           <Link href="/about" className="text-gray-800 hover:bg-gray-200 rounded p-2 transition">About</Link>
           <Link href="/contact" className="text-gray-800 hover:bg-gray-200 rounded p-2 transition">Contact</Link>
         </div>
