@@ -6,9 +6,11 @@
 
 ## Demo 📸
 
-![Screenshot (208)](https://github.com/user-attachments/assets/cc3e61ea-10c3-4140-9afc-2bdc73844153)
+![Screenshot (210)](https://github.com/user-attachments/assets/698ed4e5-9c50-4498-b40a-77a6af02a148)
 
-**Live Demo**: [Explore the Portfolio]([https://your-portfolio-link.com](https://next-js-simple-portfolio-31n2m1wan-zainab-behzads-projects.vercel.app)) 🌐
+
+**Live Demo**: [Explore the 
+]([https://your-portfolio-link.com](https://next-js-simple-portfolio-31n2m1wan-zainab-behzads-projects.vercel.app)) 🌐
 
 ## Features 🎉
 
